@@ -40,7 +40,7 @@ Plans:
 **Plans:** 4 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Xcode project + four SPM package skeletons with module boundary stubs
+- [x] 02-01-PLAN.md — Xcode project + four SPM package skeletons with module boundary stubs
 - [ ] 02-02-PLAN.md — Three App Extension targets with entitlements and Screen Time base class stubs
 - [ ] 02-03-PLAN.md — Assemble APP_REVIEW_PREFLIGHT.md from Phase 1 artifacts
 - [ ] 02-04-PLAN.md — XCTest targets and all 9 UAT stubs (one per requirement CC-01 through POL-03)
@@ -50,4 +50,4 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Controlled Client + Native Blocking | 4/4 | Complete | 2026-03-03 |
-| 2. iOS Implementation Scaffolding | 0/4 | Planned | — |
+| 2. iOS Implementation Scaffolding | 1/4 | In Progress | — |
