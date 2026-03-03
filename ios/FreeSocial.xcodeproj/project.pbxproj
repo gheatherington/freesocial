@@ -14,7 +14,58 @@
 		A101000100000011 /* ScreenTimeEngine in Frameworks */ = {isa = PBXBuildFile; productRef = A101000500000002 /* ScreenTimeEngine */; };
 		A101000100000012 /* PolicyStore in Frameworks */ = {isa = PBXBuildFile; productRef = A101000500000003 /* PolicyStore */; };
 		A101000100000013 /* ConsentManager in Frameworks */ = {isa = PBXBuildFile; productRef = A101000500000004 /* ConsentManager */; };
+		/* DeviceActivityMonitor extension */
+		A102000100000001 /* DeviceActivityMonitorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102000200000001 /* DeviceActivityMonitorExtension.swift */; };
+		A102000100000010 /* PolicyStore in Frameworks (DAM) */ = {isa = PBXBuildFile; productRef = A102000500000001 /* PolicyStore */; };
+		A102000100000020 /* DeviceActivityMonitor.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A102000200000005 /* DeviceActivityMonitor.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		/* ShieldConfiguration extension */
+		A103000100000001 /* ShieldConfigurationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A103000200000001 /* ShieldConfigurationExtension.swift */; };
+		A103000100000020 /* ShieldConfiguration.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A103000200000005 /* ShieldConfiguration.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		/* ShieldAction extension */
+		A104000100000001 /* ShieldActionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A104000200000001 /* ShieldActionExtension.swift */; };
+		A104000100000010 /* PolicyStore in Frameworks (SA) */ = {isa = PBXBuildFile; productRef = A104000500000001 /* PolicyStore */; };
+		A104000100000020 /* ShieldAction.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A104000200000005 /* ShieldAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A102000900000001 /* PBXContainerItemProxy (DAM) */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A101000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A102000600000001;
+			remoteInfo = DeviceActivityMonitor;
+		};
+		A103000900000001 /* PBXContainerItemProxy (SC) */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A101000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A103000600000001;
+			remoteInfo = ShieldConfiguration;
+		};
+		A104000900000001 /* PBXContainerItemProxy (ShieldAction) */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A101000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A104000600000001;
+			remoteInfo = ShieldAction;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A105000300000001 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A102000100000020 /* DeviceActivityMonitor.appex in Embed Foundation Extensions */,
+				A103000100000020 /* ShieldConfiguration.appex in Embed Foundation Extensions */,
+				A104000100000020 /* ShieldAction.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A101000200000001 /* FreeSocialApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeSocialApp.swift; sourceTree = "<group>"; };
@@ -22,6 +73,21 @@
 		A101000200000003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A101000200000004 /* FreeSocial.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FreeSocial.entitlements; sourceTree = "<group>"; };
 		A101000200000005 /* FreeSocial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreeSocial.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		/* DeviceActivityMonitor extension */
+		A102000200000001 /* DeviceActivityMonitorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceActivityMonitorExtension.swift; sourceTree = "<group>"; };
+		A102000200000002 /* DeviceActivityMonitor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DeviceActivityMonitor.entitlements; sourceTree = "<group>"; };
+		A102000200000003 /* Info.plist (DAM) */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A102000200000005 /* DeviceActivityMonitor.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DeviceActivityMonitor.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		/* ShieldConfiguration extension */
+		A103000200000001 /* ShieldConfigurationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldConfigurationExtension.swift; sourceTree = "<group>"; };
+		A103000200000002 /* ShieldConfiguration.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShieldConfiguration.entitlements; sourceTree = "<group>"; };
+		A103000200000003 /* Info.plist (SC) */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A103000200000005 /* ShieldConfiguration.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShieldConfiguration.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		/* ShieldAction extension */
+		A104000200000001 /* ShieldActionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldActionExtension.swift; sourceTree = "<group>"; };
+		A104000200000002 /* ShieldAction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShieldAction.entitlements; sourceTree = "<group>"; };
+		A104000200000003 /* Info.plist (SA) */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A104000200000005 /* ShieldAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShieldAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +99,29 @@
 				A101000100000011 /* ScreenTimeEngine in Frameworks */,
 				A101000100000012 /* PolicyStore in Frameworks */,
 				A101000100000013 /* ConsentManager in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A102000300000001 /* Frameworks (DAM) */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A102000100000010 /* PolicyStore in Frameworks (DAM) */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A103000300000001 /* Frameworks (SC) */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A104000300000001 /* Frameworks (SA) */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A104000100000010 /* PolicyStore in Frameworks (SA) */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +143,9 @@
 			isa = PBXGroup;
 			children = (
 				A101000200000005 /* FreeSocial.app */,
+				A102000200000005 /* DeviceActivityMonitor.appex */,
+				A103000200000005 /* ShieldConfiguration.appex */,
+				A104000200000005 /* ShieldAction.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -65,10 +157,51 @@
 			name = Packages;
 			sourceTree = "<group>";
 		};
+		A102000400000001 /* DeviceActivityMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				A102000200000001 /* DeviceActivityMonitorExtension.swift */,
+				A102000200000002 /* DeviceActivityMonitor.entitlements */,
+				A102000200000003 /* Info.plist (DAM) */,
+			);
+			path = DeviceActivityMonitor;
+			sourceTree = "<group>";
+		};
+		A103000400000001 /* ShieldConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				A103000200000001 /* ShieldConfigurationExtension.swift */,
+				A103000200000002 /* ShieldConfiguration.entitlements */,
+				A103000200000003 /* Info.plist (SC) */,
+			);
+			path = ShieldConfiguration;
+			sourceTree = "<group>";
+		};
+		A104000400000001 /* ShieldAction */ = {
+			isa = PBXGroup;
+			children = (
+				A104000200000001 /* ShieldActionExtension.swift */,
+				A104000200000002 /* ShieldAction.entitlements */,
+				A104000200000003 /* Info.plist (SA) */,
+			);
+			path = ShieldAction;
+			sourceTree = "<group>";
+		};
+		A105000400000001 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A102000400000001 /* DeviceActivityMonitor */,
+				A103000400000001 /* ShieldConfiguration */,
+				A104000400000001 /* ShieldAction */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		A101000400000000 /* root */ = {
 			isa = PBXGroup;
 			children = (
 				A101000400000001 /* FreeSocial */,
+				A105000400000001 /* Extensions */,
 				A101000400000003 /* Packages */,
 				A101000400000002 /* Products */,
 			);
@@ -84,10 +217,14 @@
 				A101000300000002 /* Sources */,
 				A101000300000001 /* Frameworks */,
 				A101000300000003 /* Resources */,
+				A105000300000001 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A102000A00000001 /* PBXTargetDependency (DAM) */,
+				A103000A00000001 /* PBXTargetDependency (SC) */,
+				A104000A00000001 /* PBXTargetDependency (SA) */,
 			);
 			name = FreeSocial;
 			packageProductDependencies = (
@@ -100,6 +237,62 @@
 			productReference = A101000200000005 /* FreeSocial.app */;
 			productType = "com.apple.product-type.application";
 		};
+		A102000600000001 /* DeviceActivityMonitor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A102000700000001 /* Build configuration list for PBXNativeTarget "DeviceActivityMonitor" */;
+			buildPhases = (
+				A102000300000002 /* Sources (DAM) */,
+				A102000300000001 /* Frameworks (DAM) */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DeviceActivityMonitor;
+			packageProductDependencies = (
+				A102000500000001 /* PolicyStore */,
+			);
+			productName = DeviceActivityMonitor;
+			productReference = A102000200000005 /* DeviceActivityMonitor.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		A103000600000001 /* ShieldConfiguration */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A103000700000001 /* Build configuration list for PBXNativeTarget "ShieldConfiguration" */;
+			buildPhases = (
+				A103000300000002 /* Sources (SC) */,
+				A103000300000001 /* Frameworks (SC) */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ShieldConfiguration;
+			packageProductDependencies = (
+			);
+			productName = ShieldConfiguration;
+			productReference = A103000200000005 /* ShieldConfiguration.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		A104000600000001 /* ShieldAction */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A104000700000001 /* Build configuration list for PBXNativeTarget "ShieldAction" */;
+			buildPhases = (
+				A104000300000002 /* Sources (SA) */,
+				A104000300000001 /* Frameworks (SA) */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ShieldAction;
+			packageProductDependencies = (
+				A104000500000001 /* PolicyStore */,
+			);
+			productName = ShieldAction;
+			productReference = A104000200000005 /* ShieldAction.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -111,6 +304,15 @@
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					A101000600000001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					A102000600000001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					A103000600000001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					A104000600000001 = {
 						CreatedOnToolsVersion = 15.0;
 					};
 				};
@@ -135,6 +337,9 @@
 			projectRoot = "";
 			targets = (
 				A101000600000001 /* FreeSocial */,
+				A102000600000001 /* DeviceActivityMonitor */,
+				A103000600000001 /* ShieldConfiguration */,
+				A104000600000001 /* ShieldAction */,
 			);
 		};
 /* End PBXProject section */
@@ -160,7 +365,49 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A102000300000002 /* Sources (DAM) */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A102000100000001 /* DeviceActivityMonitorExtension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A103000300000002 /* Sources (SC) */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A103000100000001 /* ShieldConfigurationExtension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A104000300000002 /* Sources (SA) */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A104000100000001 /* ShieldActionExtension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A102000A00000001 /* PBXTargetDependency (DAM) */ = {
+			isa = PBXTargetDependency;
+			target = A102000600000001 /* DeviceActivityMonitor */;
+			targetProxy = A102000900000001 /* PBXContainerItemProxy (DAM) */;
+		};
+		A103000A00000001 /* PBXTargetDependency (SC) */ = {
+			isa = PBXTargetDependency;
+			target = A103000600000001 /* ShieldConfiguration */;
+			targetProxy = A103000900000001 /* PBXContainerItemProxy (SC) */;
+		};
+		A104000A00000001 /* PBXTargetDependency (SA) */ = {
+			isa = PBXTargetDependency;
+			target = A104000600000001 /* ShieldAction */;
+			targetProxy = A104000900000001 /* PBXContainerItemProxy (ShieldAction) */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		A101000700000003 /* Debug */ = {
@@ -337,6 +584,147 @@
 			};
 			name = Release;
 		};
+		/* DeviceActivityMonitor extension build configurations */
+		A102000700000003 /* Debug (DAM) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Extensions/DeviceActivityMonitor/DeviceActivityMonitor.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Extensions/DeviceActivityMonitor/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.freesocial.app.DeviceActivityMonitor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A102000700000004 /* Release (DAM) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Extensions/DeviceActivityMonitor/DeviceActivityMonitor.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Extensions/DeviceActivityMonitor/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.freesocial.app.DeviceActivityMonitor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		/* ShieldConfiguration extension build configurations */
+		A103000700000003 /* Debug (SC) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Extensions/ShieldConfiguration/ShieldConfiguration.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Extensions/ShieldConfiguration/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.freesocial.app.ShieldConfiguration;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A103000700000004 /* Release (SC) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Extensions/ShieldConfiguration/ShieldConfiguration.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Extensions/ShieldConfiguration/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.freesocial.app.ShieldConfiguration;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		/* ShieldAction extension build configurations */
+		A104000700000003 /* Debug (SA) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Extensions/ShieldAction/ShieldAction.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Extensions/ShieldAction/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.freesocial.app.ShieldAction;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A104000700000004 /* Release (SA) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Extensions/ShieldAction/ShieldAction.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Extensions/ShieldAction/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.freesocial.app.ShieldAction;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -354,6 +742,33 @@
 			buildConfigurations = (
 				A101000700000003 /* Debug */,
 				A101000700000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A102000700000001 /* Build configuration list for PBXNativeTarget "DeviceActivityMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A102000700000003 /* Debug (DAM) */,
+				A102000700000004 /* Release (DAM) */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A103000700000001 /* Build configuration list for PBXNativeTarget "ShieldConfiguration" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A103000700000003 /* Debug (SC) */,
+				A103000700000004 /* Release (SC) */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A104000700000001 /* Build configuration list for PBXNativeTarget "ShieldAction" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A104000700000003 /* Debug (SA) */,
+				A104000700000004 /* Release (SA) */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -399,6 +814,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A101000800000004 /* XCLocalSwiftPackageReference "Packages/ConsentManager" */;
 			productName = ConsentManager;
+		};
+		A102000500000001 /* PolicyStore (DAM) */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A101000800000003 /* XCLocalSwiftPackageReference "Packages/PolicyStore" */;
+			productName = PolicyStore;
+		};
+		A104000500000001 /* PolicyStore (SA) */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A101000800000003 /* XCLocalSwiftPackageReference "Packages/PolicyStore" */;
+			productName = PolicyStore;
 		};
 /* End XCSwiftPackageProductDependency section */
 

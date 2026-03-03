@@ -1,0 +1,32 @@
+import DeviceActivity
+import ManagedSettings
+import PolicyStore
+
+final class DeviceActivityMonitorExtension: DeviceActivityMonitor {
+
+    private let policyRepository = PolicyRepository()
+
+    override func intervalDidStart(for activity: DeviceActivityName) {
+        // Stub: apply baseline shields via PolicyStore
+        super.intervalDidStart(for: activity)
+    }
+
+    override func intervalDidEnd(for activity: DeviceActivityName) {
+        // Stub: remove or adjust shields when monitored interval ends
+        super.intervalDidEnd(for: activity)
+    }
+
+    override func eventDidReachThreshold(
+        _ event: DeviceActivityEvent.Name,
+        activity: DeviceActivityName
+    ) {
+        // Stub: record bypass event and escalate policy
+        let bypassEvent = BypassEvent(
+            id: UUID(),
+            occurredAt: Date(),
+            escalationLevelAtTime: policyRepository.currentEscalationLevel()
+        )
+        policyRepository.recordBypassEvent(bypassEvent)
+        super.eventDidReachThreshold(event, activity: activity)
+    }
+}
