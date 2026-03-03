@@ -19,9 +19,9 @@
 
 ### Policy, Safety, and Trust
 
-- [ ] **POL-01**: App behavior and claims are precise and App Review-safe
+- [x] **POL-01**: App behavior and claims are precise and App Review-safe
 - [x] **POL-02**: Privacy posture is explicit, minimal, and user-consented
-- [ ] **POL-03**: UX clearly communicates limitations (what is and is not enforceable)
+- [x] **POL-03**: UX clearly communicates limitations (what is and is not enforceable)
 
 ## v2 Requirements
 

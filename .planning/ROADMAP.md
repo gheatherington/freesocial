@@ -37,7 +37,7 @@ Plans:
   2. Skeleton modules exist for: controlled client flow, Screen Time enforcement, policy/consent state.
   3. XCTest cases exist for every UAT requirement from 01-04-uat-plan.md.
   4. App Review preflight package is assembled (capability claims matrix, limitation disclosures, stop-ship checklist).
-**Plans:** 4 plans
+**Plans:** 2/4 plans executed
 
 Plans:
 - [x] 02-01-PLAN.md — Xcode project + four SPM package skeletons with module boundary stubs
@@ -50,4 +50,4 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Controlled Client + Native Blocking | 4/4 | Complete | 2026-03-03 |
-| 2. iOS Implementation Scaffolding | 1/4 | In Progress | — |
+| 2. iOS Implementation Scaffolding | 2/4 | In Progress|  |
