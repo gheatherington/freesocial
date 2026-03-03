@@ -1,0 +1,23 @@
+# Xcode
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+DerivedData/
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.build/
+.swiftpm/
+*.resolved
+xcuserdata/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor
+.vscode/
+*.swp
+*.swo
