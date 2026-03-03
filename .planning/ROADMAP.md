@@ -7,7 +7,7 @@ Build an iOS-first product that enforces reduced addictive social consumption th
 ## Phases
 
 - [x] **Phase 1: Controlled Client + Native Blocking** - Build and validate enforceable v1 architecture
-- [ ] **Phase 2: iOS Implementation Scaffolding** - Stand up the iOS project with module skeletons, test harness, and App Review preflight package
+- [x] **Phase 2: iOS Implementation Scaffolding** - Stand up the iOS project with module skeletons, test harness, and App Review preflight package (completed 2026-03-03)
 
 ## Phase Details
 
@@ -37,7 +37,7 @@ Plans:
   2. Skeleton modules exist for: controlled client flow, Screen Time enforcement, policy/consent state.
   3. XCTest cases exist for every UAT requirement from 01-04-uat-plan.md.
   4. App Review preflight package is assembled (capability claims matrix, limitation disclosures, stop-ship checklist).
-**Plans:** 3/4 plans executed
+**Plans:** 4/4 plans complete
 
 Plans:
 - [x] 02-01-PLAN.md — Xcode project + four SPM package skeletons with module boundary stubs
@@ -50,4 +50,4 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Controlled Client + Native Blocking | 4/4 | Complete | 2026-03-03 |
-| 2. iOS Implementation Scaffolding | 3/4 | In Progress|  |
+| 2. iOS Implementation Scaffolding | 4/4 | Complete   | 2026-03-03 |

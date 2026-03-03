@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-02-PLAN.md
-last_updated: "2026-03-03T17:13:00.582Z"
+stopped_at: Completed 02-04-PLAN.md
+last_updated: "2026-03-03T21:28:10.331Z"
 last_activity: "2026-03-03 — Executed 02-03: assembled APP_REVIEW_PREFLIGHT.md from Phase 1 artifacts"
 progress:
   total_phases: 2
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 9
-  completed_plans: 7
+  completed_plans: 8
   percent: 67
 ---
 
@@ -51,6 +51,8 @@ Progress: [███████░░░] 67%
 - [Phase 02-ios-implementation-scaffolding]: Hand-wrote extension targets into project.pbxproj (same as Plan 01 approach) — no Tuist or XcodeGen
 - [Phase 02-ios-implementation-scaffolding]: ShieldConfiguration extension uses UIKit struct API only (no SwiftUI) per research constraint
 - [Phase 02-ios-implementation-scaffolding]: NSExtensionPointIdentifier values locked: com.apple.deviceactivity.monitor-extension, .shield-configuration, .shield-action-service
+- [Phase 02-ios-implementation-scaffolding]: AppReviewPreflightTests uses XCTAssert not XCTSkip — active gate that passes when APP_REVIEW_PREFLIGHT.md exists and fails if deleted
+- [Phase 02-ios-implementation-scaffolding]: UAT stubs use XCTSkip pattern with requirement ID and pending reason — all 9 requirements traceable in test navigator from Phase 2
 
 ### Pending Todos
 None yet.
@@ -61,6 +63,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-03T17:13:00.580Z
-Stopped at: Completed 02-02-PLAN.md
+Last session: 2026-03-03T21:28:10.329Z
+Stopped at: Completed 02-04-PLAN.md
 Resume file: None
