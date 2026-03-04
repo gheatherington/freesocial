@@ -110,14 +110,25 @@ The skeleton was written targeting iOS 16.0 but the available simulator runtime 
   - `swift test` for `ios/Packages/ControlledClient` now succeeds after adding `.macOS(.v13)` to `Package.swift` platforms.
 - GitHub issue lifecycle from this session:
   - Closed: `#1` (test path miswire), `#2` (extension plist metadata), `#5` (ControlledClient host testability).
-  - Still open: `#3` (consent gating gap), `#4` (AppGroup fallback to `.standard`), `#6` (missing `Background` color asset warning), `#7` (`FallbackRouter` no-op behavior).
+  - Closed (2026-03-04, follow-up): `#3`, `#4`, `#6`, `#7` — see Session Updates below.
+
+## Session Updates (2026-03-04, follow-up)
+
+Closed all remaining open GitHub issues (#3, #4, #6, #7). All issues resolved in commit `7f21b92`.
+
+- **#7 — FallbackRouter failure contract**: Changed `routeToNativeApp(for:)` return type from `Void` to `@discardableResult Bool`. Stub returns `false` until URL routing is implemented.
+- **#6 — Background color asset warning**: Replaced `Color("Background")` asset lookup with programmatic `Color(red: 0.039, green: 0.039, blue: 0.039)` in `FeedView` and `InterventionView`. Eliminates runtime warning in package/test environments. Also added a universal (light-mode) fallback entry to `Background.colorset`.
+- **#4 — PolicyRepository .standard fallback**: Replaced silent `?? .standard` with an explicit `assertionFailure` block — fires in debug builds when App Group is unavailable, surfaces entitlement misconfiguration early. `.standard` fallback retained for release builds.
+- **#3 — Consent gate stub**: Added consent guard to `eventDidReachThreshold` in `DeviceActivityMonitorExtension`. Defaults to `true` (consent granted) pending Phase 3 `ConsentStore` wiring. Full wiring still blocked by ConsentManager/AppGroup architecture decision.
+
+No open issues remain on the repo. `gh` CLI is now authenticated via keyring (`gh auth login`).
 
 ## Security & Configuration Tips
 
 - Do not claim unsupported platform capabilities in docs or UI copy — see `ios/APP_REVIEW_PREFLIGHT.md` Section 3 (prohibited copy) and Section 2 (cannot-claim rows).
 - Use official iOS APIs only (FamilyControls, DeviceActivity, ManagedSettings) — no private/reverse-engineered integrations.
 - Treat consent, revocation, and data minimization as release blockers — `APP_REVIEW_PREFLIGHT.md` Section 6 stop-ship checklist must pass before any submission.
-- `ConsentStore` must gate `PolicyRepository.recordBypassEvent` on consent state — not yet wired (Phase 3 entry condition).
+- `ConsentStore` must gate `PolicyRepository.recordBypassEvent` on consent state — stub guard added in `DeviceActivityMonitorExtension` (defaults `true`); real wiring is a Phase 3 entry condition blocked by the ConsentManager/AppGroup architecture decision.
 
 ## Current Project Status (GSD)
 
