@@ -48,17 +48,17 @@ Key decisions carried forward from v1.0 (see PROJECT.md Key Decisions for full l
 - AppGroup.suiteName is the single source of truth — never hardcode elsewhere.
 - ShieldConfiguration extension uses UIKit struct API only.
 - APP_REVIEW_PREFLIGHT.md is the canonical stop-ship gate.
-- ConsentManager AppGroup access pattern **UNRESOLVED** — must decide before Phase 3 POL-02 implementation.
+- ConsentManager AppGroup access pattern **RESOLVED 2026-03-04** — inject `suiteName: String` via `ConsentStore.init`. Keeps ConsentManager independent of PolicyStore; callers pass `AppGroup.suiteName`.
 
 ### Phase 3 Entry Conditions (from v1.0 audit)
 
-1. ConsentManager AppGroup access pattern — decide architecture (inject suiteName, add PolicyStore dep, or shared Foundation package)
-2. Consent-to-write gating — wire revocation state into PolicyRepository.recordBypassEvent
+1. ~~ConsentManager AppGroup access pattern~~ — **RESOLVED 2026-03-04** (inject suiteName via init)
+2. Consent-to-write gating — wire `ConsentStore(suiteName: AppGroup.suiteName).loadCurrent()` into `DeviceActivityMonitorExtension` and `PolicyRepository.recordBypassEvent`
 3. BypassEvent schema expansion — add Phase 1 event types and fields
 4. Deauthorization detection — add observer + enforcement disable chain in AuthorizationManager
 5. InterventionView trigger — connect to FeedView session boundary
 6. Remaining disclosure strings — implement onboarding/Settings UI with 9 remaining strings
-7. CI build gate — confirm xcodebuild BUILD SUCCEEDED with Xcode.app before Phase 3 code changes
+7. ~~CI build gate~~ — **RESOLVED 2026-03-04** (xcodebuild BUILD SUCCEEDED on iOS 26.2)
 
 ### Pending Todos
 
@@ -67,7 +67,7 @@ None.
 ### Blockers/Concerns
 
 - Third-party API/terms may limit replacement-client feature parity.
-- xcodebuild BUILD SUCCEEDED verification requires Xcode.app — must resolve in CI before Phase 3.
+- No remaining pre-Phase-3 blockers as of 2026-03-04.
 
 ## Session Continuity
 

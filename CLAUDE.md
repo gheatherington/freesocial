@@ -128,7 +128,7 @@ No open issues remain on the repo. `gh` CLI is now authenticated via keyring (`g
 - Do not claim unsupported platform capabilities in docs or UI copy — see `ios/APP_REVIEW_PREFLIGHT.md` Section 3 (prohibited copy) and Section 2 (cannot-claim rows).
 - Use official iOS APIs only (FamilyControls, DeviceActivity, ManagedSettings) — no private/reverse-engineered integrations.
 - Treat consent, revocation, and data minimization as release blockers — `APP_REVIEW_PREFLIGHT.md` Section 6 stop-ship checklist must pass before any submission.
-- `ConsentStore` must gate `PolicyRepository.recordBypassEvent` on consent state — stub guard added in `DeviceActivityMonitorExtension` (defaults `true`); real wiring is a Phase 3 entry condition blocked by the ConsentManager/AppGroup architecture decision.
+- `ConsentStore` must gate `PolicyRepository.recordBypassEvent` on consent state — stub guard added in `DeviceActivityMonitorExtension` (defaults `true`); real wiring is a Phase 3 entry condition. Use `ConsentStore(suiteName: AppGroup.suiteName)` — architecture decision resolved 2026-03-04.
 
 ## Current Project Status (GSD)
 
@@ -140,7 +140,7 @@ No open issues remain on the repo. `gh` CLI is now authenticated via keyring (`g
 ## What To Do Next
 
 **Resolve before Phase 3 begins:**
-1. Decide ConsentManager AppGroup access pattern — options: inject `suiteName` via init, add PolicyStore as a ConsentManager dependency, or create a shared Foundation package. This blocks POL-02 end-to-end implementation.
+1. ~~Decide ConsentManager AppGroup access pattern~~ — **DONE 2026-03-04**. Inject `suiteName: String` via `ConsentStore.init`. ConsentManager stays independent of PolicyStore; callers pass `AppGroup.suiteName` directly. See `ConsentStore.swift`.
 2. ~~Set up CI with Xcode.app to confirm `xcodebuild BUILD SUCCEEDED`~~ — **DONE 2026-03-04**. Build succeeds on iOS 26.2 simulator. See iOS 26 SDK fixes below.
 
 **Start next milestone:**
