@@ -30,22 +30,16 @@ Installed simulator runtime: **iOS 26.2**. Use `iPhone 17` as the target device.
 xcodebuild -project ios/FreeSocial.xcodeproj -scheme FreeSocial \
   -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.2' build
 
-# Test (expect: 9 skipped UAT stubs, 1 passed AppReviewPreflightTests, 0 failed)
+# Test (current baseline: FreeSocialTests passes; UI test target present but empty)
 xcodebuild test -project ios/FreeSocial.xcodeproj -scheme FreeSocial \
   -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.2'
 
-# Run on simulator (extensions must be stripped — FamilyControls/ManagedSettings entitlements
-# are rejected by the simulator; the extensions build correctly for real-device deployment)
+# Run on simulator (raw app install works as of 2026-03-04 after plist metadata fixes)
 DERIVED="/Users/gavin/Library/Developer/Xcode/DerivedData/FreeSocial-gjbgihqsoeillafxqsdobzpijlbm"
 APP_SRC="$DERIVED/Build/Products/Debug-iphonesimulator/FreeSocial.app"
-APP_TMP="/tmp/FreeSocialSim.app"
 xcrun simctl boot 15796420-57AA-4732-BE47-5AB2F98B7626  # iPhone 17
 open -a Simulator
-rm -rf "$APP_TMP" && cp -R "$APP_SRC" "$APP_TMP"
-rm -rf "$APP_TMP/PlugIns/DeviceActivityMonitor.appex" \
-       "$APP_TMP/PlugIns/ShieldConfiguration.appex" \
-       "$APP_TMP/PlugIns/ShieldAction.appex"
-xcrun simctl install booted "$APP_TMP"
+xcrun simctl install booted "$APP_SRC"
 xcrun simctl launch booted com.freesocial.app
 ```
 
@@ -103,8 +97,20 @@ The skeleton was written targeting iOS 16.0 but the available simulator runtime 
 - **`ShieldActionExtension.swift`**: Updated `handle(for:)` overrides from `Application`/`WebDomain` to `ApplicationToken`/`WebDomainToken` — iOS 26 SDK changed `ShieldActionDelegate` to use opaque token types.
 - **`DeviceActivityMonitorExtension.swift`**: Added `import Foundation` — `UUID` and `Date` are not implicitly available without it.
 - **`InterventionView.swift`**: Inlined the default string in the public `init` — Swift 5.9+ disallows `private` (or `internal`) static properties as default argument values in `public` initializers across module boundaries.
-- **Extension `Info.plist` files** (all 3): Added `CFBundleIdentifier = $(PRODUCT_BUNDLE_IDENTIFIER)` — without it the built `.appex` has no bundle ID and the parent-app prefix check fails at install time.
-- **Simulator install limitation**: All three `.appex` targets (DeviceActivityMonitor, ShieldConfiguration, ShieldAction) fail `xcrun simctl install` with "Invalid placeholder attributes / Failed to create promise" — the simulator rejects FamilyControls/ManagedSettings extension points. Workaround: copy the `.app` bundle to `/tmp`, strip all `PlugIns/*.appex`, and install the stripped copy. Extensions build correctly and would deploy to a real device with proper provisioning.
+- **Extension `Info.plist` files** (all 3): Added required metadata keys for simulator install compatibility: `CFBundleIdentifier`, `CFBundleExecutable`, `CFBundleName`, `CFBundleVersion`, `CFBundleShortVersionString`, plus standard bundle keys. Without these, simulator install fails with `Invalid placeholder attributes`, `MissingBundleExecutable`, or `MissingBundleNameString`.
+- **Simulator status (updated 2026-03-04)**: After plist normalization, raw simulator install/launch of the full app bundle (including `.appex`) succeeds and `xcodebuild test` passes.
+
+## Session Updates (2026-03-04)
+
+- Fixed `FreeSocialTests` target path wiring in `project.pbxproj`:
+  - `Tests (FreeSocial)` group path changed from `Tests` to `FreeSocial/Tests`.
+  - Resolved missing file error for `AppReviewPreflightTests.swift`.
+- Restored testability for simulator and package workflows:
+  - `xcodebuild test` now succeeds on `iPhone 17 / iOS 26.2`.
+  - `swift test` for `ios/Packages/ControlledClient` now succeeds after adding `.macOS(.v13)` to `Package.swift` platforms.
+- GitHub issue lifecycle from this session:
+  - Closed: `#1` (test path miswire), `#2` (extension plist metadata), `#5` (ControlledClient host testability).
+  - Still open: `#3` (consent gating gap), `#4` (AppGroup fallback to `.standard`), `#6` (missing `Background` color asset warning), `#7` (`FallbackRouter` no-op behavior).
 
 ## Security & Configuration Tips
 
