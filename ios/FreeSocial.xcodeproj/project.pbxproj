@@ -251,7 +251,7 @@
 			children = (
 				A110000400000001 /* FreeSocialTests */,
 			);
-			path = Tests;
+			path = FreeSocial/Tests;
 			sourceTree = "<group>";
 		};
 		A111000400000001 /* FreeSocialUITests */ = {
