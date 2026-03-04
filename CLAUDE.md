@@ -138,28 +138,37 @@ Closed all remaining open GitHub issues (#3, #4, #6, #7). Resolved ConsentManage
 - Treat consent, revocation, and data minimization as release blockers — `APP_REVIEW_PREFLIGHT.md` Section 6 stop-ship checklist must pass before any submission.
 - `ConsentStore` must gate `PolicyRepository.recordBypassEvent` on consent state — stub guard added in `DeviceActivityMonitorExtension` (defaults `true`); real wiring is a Phase 3 entry condition. Use `ConsentStore(suiteName: AppGroup.suiteName)` — architecture decision resolved 2026-03-04.
 
+## Session Updates (2026-03-04, Phase 3 planning)
+
+Created Phase 3 planning artifacts. All architectural decisions for the data layer captured.
+
+**Phase 3 context decisions (commit `1a5d174`):**
+- **FamilyActivitySelectionStore placement**: Lives in `PolicyStore` package — co-located with all UserDefaults-backed persistence (PolicyRepository, BypassEvent, EscalationLevel). ControlledClient may import PolicyStore per module rules.
+- **Revocation semantics**: `loadCurrent()` returns the `ConsentRecord` even when revoked — callers check `?.isRevoked == false`. Returning nil is reserved for "never consented." `revoke()` sets `isRevoked = true` and `revokedAt = Date()` and persists. DeviceActivityMonitor TODO updated to check `isRevoked` flag, not nil-ness.
+- **AuditLog storage**: UserDefaults with JSONEncoder'd array of `AuditEntry` — consistent with ConsentStore and PolicyRepository. File-based append deferred (would require NSFileCoordinator for cross-process safety).
+- **BypassEvent schema**: Keep as-is (`id`, `occurredAt`, `escalationLevelAtTime`). "Phase 1 telemetry spec" undefined in codebase; escalation deferred to v1.2. No expansion needed now.
+
+**Artifacts created:**
+- `.planning/phases/03-data-layer-foundations/` — phase directory
+- `.planning/phases/03-data-layer-foundations/03-CONTEXT.md` — implementation decisions
+
 ## Current Project Status (GSD)
 
-- **Milestone:** v1.0 Foundation — SHIPPED 2026-03-03
-- **Stage:** Planning next milestone (v1.1 Implementation)
-- **Git tag:** `v1.0`
-- **All v1 requirements:** scaffolded and verified (9/9)
+- **Milestone:** v1.1 Implementation — IN PROGRESS
+- **Stage:** Phase 3 context captured — ready to plan
+- **Git tag:** `v1.0` (last shipped)
+- **Phase 3 context:** `.planning/phases/03-data-layer-foundations/03-CONTEXT.md`
 
 ## What To Do Next
 
-**Resolve before Phase 3 begins:**
-1. ~~Decide ConsentManager AppGroup access pattern~~ — **DONE 2026-03-04**. Inject `suiteName: String` via `ConsentStore.init`. ConsentManager stays independent of PolicyStore; callers pass `AppGroup.suiteName` directly. See `ConsentStore.swift`.
-2. ~~Set up CI with Xcode.app to confirm `xcodebuild BUILD SUCCEEDED`~~ — **DONE 2026-03-04**. Build succeeds on iOS 26.2 simulator. See iOS 26 SDK fixes below.
-
-**Start next milestone:**
+**Plan Phase 3:**
 ```
-/gsd:new-milestone
+/gsd:plan-phase 3
 ```
 Then `/clear` first for a fresh context window.
 
-**Phase 3 entry conditions (from v1.0 audit):**
-- Implement consent-to-write gating in `PolicyRepository.recordBypassEvent`
-- Add deauthorization detection path in `AuthorizationManager`
-- Wire `InterventionView` into `FeedView` session boundary logic
-- Expand `BypassEvent` schema to match Phase 1 telemetry spec
-- Add 9 remaining limitation disclosure strings to onboarding/Settings UI
+**Phase 3 implementation decisions (from 03-CONTEXT.md):**
+- `FamilyActivitySelectionStore` → new type in `PolicyStore` package
+- `ConsentStore.loadCurrent()` returns record even when revoked; callers check `?.isRevoked == false`
+- `AuditLog` persists to App Group UserDefaults via JSONEncoder (not a file)
+- `BypassEvent` schema unchanged — no expansion needed for v1.1

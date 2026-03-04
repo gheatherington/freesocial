@@ -110,11 +110,61 @@ The skeleton was written targeting iOS 16.0 but the available simulator runtime 
   - `swift test` for `ios/Packages/ControlledClient` now succeeds after adding `.macOS(.v13)` to `Package.swift` platforms.
 - GitHub issue lifecycle from this session:
   - Closed: `#1` (test path miswire), `#2` (extension plist metadata), `#5` (ControlledClient host testability).
-  - Still open: `#3` (consent gating gap), `#4` (AppGroup fallback to `.standard`), `#6` (missing `Background` color asset warning), `#7` (`FallbackRouter` no-op behavior).
+  - Closed (2026-03-04, follow-up): `#3`, `#4`, `#6`, `#7` — see Session Updates below.
+
+## Session Updates (2026-03-04, follow-up)
+
+Closed all remaining open GitHub issues (#3, #4, #6, #7). Resolved ConsentManager AppGroup architecture decision. All pre-Phase-3 blockers cleared.
+
+**Issue fixes (commit `7f21b92`):**
+- **#7 — FallbackRouter failure contract**: Changed `routeToNativeApp(for:)` return type from `Void` to `@discardableResult Bool`. Stub returns `false` until URL routing is implemented.
+- **#6 — Background color asset warning**: Replaced `Color("Background")` asset lookup with programmatic `Color(red: 0.039, green: 0.039, blue: 0.039)` in `FeedView` and `InterventionView`. Also added universal (light-mode) fallback entry to `Background.colorset`.
+- **#4 — PolicyRepository .standard fallback**: Replaced silent `?? .standard` with `assertionFailure` — fires in debug builds when App Group is unavailable. `.standard` fallback retained for release builds.
+- **#3 — Consent gate stub**: Added consent guard to `eventDidReachThreshold` in `DeviceActivityMonitorExtension`. Defaults to `true` pending Phase 3 `ConsentStore` wiring.
+
+**ConsentManager AppGroup decision (commit `a0b248b`):**
+- Resolved: inject `suiteName: String` via `ConsentStore.init`. ConsentManager stays independent of PolicyStore.
+- `ConsentStore` now wires shared `UserDefaults` and uses the same `assertionFailure` pattern as `PolicyRepository`.
+- Phase 3 call pattern: `ConsentStore(suiteName: AppGroup.suiteName).loadCurrent()`.
+
+## Session Updates (2026-03-04, Phase 3 planning)
+
+Created Phase 3 planning artifacts. All architectural decisions for the data layer captured.
+
+**Phase 3 context decisions (commit `1a5d174`):**
+- **FamilyActivitySelectionStore placement**: Lives in `PolicyStore` package — co-located with all UserDefaults-backed persistence (PolicyRepository, BypassEvent, EscalationLevel). ControlledClient may import PolicyStore per module rules.
+- **Revocation semantics**: `loadCurrent()` returns the `ConsentRecord` even when revoked — callers check `?.isRevoked == false`. Returning nil is reserved for "never consented." `revoke()` sets `isRevoked = true` and `revokedAt = Date()` and persists. DeviceActivityMonitor TODO updated to check `isRevoked` flag, not nil-ness.
+- **AuditLog storage**: UserDefaults with JSONEncoder'd array of `AuditEntry` — consistent with ConsentStore and PolicyRepository. File-based append deferred (would require NSFileCoordinator for cross-process safety).
+- **BypassEvent schema**: Keep as-is (`id`, `occurredAt`, `escalationLevelAtTime`). "Phase 1 telemetry spec" undefined in codebase; escalation deferred to v1.2. No expansion needed now.
+
+**Artifacts created:**
+- `.planning/phases/03-data-layer-foundations/` — phase directory
+- `.planning/phases/03-data-layer-foundations/03-CONTEXT.md` — implementation decisions
 
 ## Security & Configuration Tips
 
 - Do not claim unsupported platform capabilities in docs or UI copy — see `ios/APP_REVIEW_PREFLIGHT.md` Section 3 (prohibited copy) and Section 2 (cannot-claim rows).
 - Use official iOS APIs only (FamilyControls, DeviceActivity, ManagedSettings) — no private/reverse-engineered integrations.
 - Treat consent, revocation, and data minimization as release blockers — `APP_REVIEW_PREFLIGHT.md` Section 6 stop-ship checklist must pass before any submission.
-- `ConsentStore` must gate `PolicyRepository.recordBypassEvent` on consent state — not yet wired (Phase 3 entry condition).
+- `ConsentStore` must gate `PolicyRepository.recordBypassEvent` on consent state — stub guard added in `DeviceActivityMonitorExtension` (defaults `true`); real wiring is a Phase 3 entry condition. Use `ConsentStore(suiteName: AppGroup.suiteName)` — architecture decision resolved 2026-03-04.
+
+## Current Project Status (GSD)
+
+- **Milestone:** v1.1 Implementation — IN PROGRESS
+- **Stage:** Phase 3 context captured — ready to plan
+- **Git tag:** `v1.0` (last shipped)
+- **Phase 3 context:** `.planning/phases/03-data-layer-foundations/03-CONTEXT.md`
+
+## What To Do Next
+
+**Plan Phase 3:**
+```
+/gsd:plan-phase 3
+```
+Then `/clear` first for a fresh context window.
+
+**Phase 3 implementation decisions (from 03-CONTEXT.md):**
+- `FamilyActivitySelectionStore` → new type in `PolicyStore` package
+- `ConsentStore.loadCurrent()` returns record even when revoked; callers check `?.isRevoked == false`
+- `AuditLog` persists to App Group UserDefaults via JSONEncoder (not a file)
+- `BypassEvent` schema unchanged — no expansion needed for v1.1
