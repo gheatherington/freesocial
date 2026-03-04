@@ -114,14 +114,22 @@ The skeleton was written targeting iOS 16.0 but the available simulator runtime 
 
 ## Session Updates (2026-03-04, follow-up)
 
-Closed all remaining open GitHub issues (#3, #4, #6, #7). All issues resolved in commit `7f21b92`.
+Closed all remaining open GitHub issues (#3, #4, #6, #7). Resolved ConsentManager AppGroup architecture decision. All pre-Phase-3 blockers cleared.
 
+**Issue fixes (commit `7f21b92`):**
 - **#7 — FallbackRouter failure contract**: Changed `routeToNativeApp(for:)` return type from `Void` to `@discardableResult Bool`. Stub returns `false` until URL routing is implemented.
-- **#6 — Background color asset warning**: Replaced `Color("Background")` asset lookup with programmatic `Color(red: 0.039, green: 0.039, blue: 0.039)` in `FeedView` and `InterventionView`. Eliminates runtime warning in package/test environments. Also added a universal (light-mode) fallback entry to `Background.colorset`.
-- **#4 — PolicyRepository .standard fallback**: Replaced silent `?? .standard` with an explicit `assertionFailure` block — fires in debug builds when App Group is unavailable, surfaces entitlement misconfiguration early. `.standard` fallback retained for release builds.
-- **#3 — Consent gate stub**: Added consent guard to `eventDidReachThreshold` in `DeviceActivityMonitorExtension`. Defaults to `true` (consent granted) pending Phase 3 `ConsentStore` wiring. Full wiring still blocked by ConsentManager/AppGroup architecture decision.
+- **#6 — Background color asset warning**: Replaced `Color("Background")` asset lookup with programmatic `Color(red: 0.039, green: 0.039, blue: 0.039)` in `FeedView` and `InterventionView`. Also added universal (light-mode) fallback entry to `Background.colorset`.
+- **#4 — PolicyRepository .standard fallback**: Replaced silent `?? .standard` with `assertionFailure` — fires in debug builds when App Group is unavailable. `.standard` fallback retained for release builds.
+- **#3 — Consent gate stub**: Added consent guard to `eventDidReachThreshold` in `DeviceActivityMonitorExtension`. Defaults to `true` pending Phase 3 `ConsentStore` wiring.
 
-No open issues remain on the repo. `gh` CLI is now authenticated via keyring (`gh auth login`).
+**ConsentManager AppGroup decision (commit `a0b248b`):**
+- Resolved: inject `suiteName: String` via `ConsentStore.init`. ConsentManager stays independent of PolicyStore.
+- `ConsentStore` now wires shared `UserDefaults` and uses the same `assertionFailure` pattern as `PolicyRepository`.
+- Phase 3 call pattern: `ConsentStore(suiteName: AppGroup.suiteName).loadCurrent()`.
+
+**State after this session:**
+- No open GitHub issues remain. `gh` CLI authenticated via keyring.
+- No remaining pre-Phase-3 blockers. Ready to run `/gsd:new-milestone`.
 
 ## Security & Configuration Tips
 
