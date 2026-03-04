@@ -7,9 +7,13 @@ public struct FallbackRouter {
 
     /// Opens the native app for the given social provider.
     /// - Parameter provider: The social provider whose native app should be opened.
-    public func routeToNativeApp(for provider: any SocialProvider) {
+    /// - Returns: `true` if the native app was successfully opened; `false` if the route is unsupported.
+    @discardableResult
+    public func routeToNativeApp(for provider: any SocialProvider) -> Bool {
         // TODO: Implement deep link routing to native Instagram/TikTok app.
         // Use UIApplication.shared.open with provider-specific URL schemes.
         // Verify URL scheme availability before attempting to open.
+        // Phase 2 stub: always returns false until URL routing is implemented.
+        return false
     }
 }

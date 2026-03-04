@@ -7,7 +7,16 @@ public struct PolicyRepository {
     private let defaults: UserDefaults
 
     public init() {
-        self.defaults = UserDefaults(suiteName: AppGroup.suiteName) ?? .standard
+        if let shared = UserDefaults(suiteName: AppGroup.suiteName) {
+            self.defaults = shared
+        } else {
+            assertionFailure(
+                "App Group '\(AppGroup.suiteName)' is unavailable — " +
+                "policy sync between app and extensions will fail. " +
+                "Verify the App Group entitlement is configured in both app and extension targets."
+            )
+            self.defaults = .standard
+        }
     }
 
     /// Returns the current escalation level. Stub always returns baseline.

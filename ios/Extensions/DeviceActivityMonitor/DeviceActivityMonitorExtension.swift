@@ -21,7 +21,13 @@ final class DeviceActivityMonitorExtension: DeviceActivityMonitor {
         _ event: DeviceActivityEvent.Name,
         activity: DeviceActivityName
     ) {
-        // Stub: record bypass event and escalate policy
+        // Consent gate: only record bypass events when the user has granted consent.
+        // Phase 2 stub — ConsentStore wiring deferred to Phase 3 (requires resolving
+        // the ConsentManager/AppGroup architecture decision). Defaults to true so
+        // stub behavior is preserved until the real gate is wired.
+        let consentIsGranted: Bool = true // TODO(Phase 3): replace with ConsentStore.loadCurrent() != nil
+        guard consentIsGranted else { return }
+
         let bypassEvent = BypassEvent(
             id: UUID(),
             occurredAt: Date(),

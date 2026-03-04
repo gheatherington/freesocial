@@ -17,7 +17,7 @@ public struct InterventionView: View {
 
     public var body: some View {
         ZStack {
-            Color("Background").ignoresSafeArea()
+            Color(red: 0.039, green: 0.039, blue: 0.039).ignoresSafeArea()
             VStack(spacing: 24) {
                 Text(message)
                     .font(.body)

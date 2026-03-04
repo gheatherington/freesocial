@@ -9,7 +9,7 @@ public struct FeedView: View {
 
     public var body: some View {
         ZStack {
-            Color("Background").ignoresSafeArea()
+            Color(red: 0.039, green: 0.039, blue: 0.039).ignoresSafeArea()
             List {
                 // Empty state — content items will be populated by ControlledClient in future phase.
                 Text("No posts yet")
