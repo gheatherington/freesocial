@@ -11,7 +11,7 @@ public struct InterventionView: View {
 
     public let message: String
 
-    public init(message: String = InterventionView.primaryMessage) {
+    public init(message: String = "Session paused: take a 30-second break before loading more.") {
         self.message = message
     }
 

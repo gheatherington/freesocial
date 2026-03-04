@@ -21,16 +21,32 @@ v1.0 milestone shipped. Repository now contains planning archives and iOS skelet
 
 ## Build, Test, and Development Commands
 
-**Requires Xcode.app** (not installed on dev machine — only CLT available):
+**Requires Xcode.app.** Installed and verified working 2026-03-04.
+
+Installed simulator runtime: **iOS 26.2**. Use `iPhone 17` as the target device.
 
 ```bash
 # Build
 xcodebuild -project ios/FreeSocial.xcodeproj -scheme FreeSocial \
-  -destination 'platform=iOS Simulator,name=iPhone 16' build
+  -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.2' build
 
 # Test (expect: 9 skipped UAT stubs, 1 passed AppReviewPreflightTests, 0 failed)
 xcodebuild test -project ios/FreeSocial.xcodeproj -scheme FreeSocial \
-  -destination 'platform=iOS Simulator,name=iPhone 16'
+  -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.2'
+
+# Run on simulator (extensions must be stripped — FamilyControls/ManagedSettings entitlements
+# are rejected by the simulator; the extensions build correctly for real-device deployment)
+DERIVED="/Users/gavin/Library/Developer/Xcode/DerivedData/FreeSocial-gjbgihqsoeillafxqsdobzpijlbm"
+APP_SRC="$DERIVED/Build/Products/Debug-iphonesimulator/FreeSocial.app"
+APP_TMP="/tmp/FreeSocialSim.app"
+xcrun simctl boot 15796420-57AA-4732-BE47-5AB2F98B7626  # iPhone 17
+open -a Simulator
+rm -rf "$APP_TMP" && cp -R "$APP_SRC" "$APP_TMP"
+rm -rf "$APP_TMP/PlugIns/DeviceActivityMonitor.appex" \
+       "$APP_TMP/PlugIns/ShieldConfiguration.appex" \
+       "$APP_TMP/PlugIns/ShieldAction.appex"
+xcrun simctl install booted "$APP_TMP"
+xcrun simctl launch booted com.freesocial.app
 ```
 
 Planning/GSD commands:
@@ -79,6 +95,17 @@ Git repo is live at `github.com/gheatherington/freesocial`.
 - Never hardcode `group.com.freesocial.app` in Swift; always use `AppGroup.suiteName`.
 - PRs should include: requirement IDs impacted, verification evidence, screenshots for UI changes.
 
+## iOS 26 SDK Compatibility Notes
+
+The skeleton was written targeting iOS 16.0 but the available simulator runtime is iOS 26.2. Several fixes were required:
+
+- **`project.pbxproj`**: Added `SDKROOT = iphoneos` to project-level Debug and Release configs — without it xcodebuild defaults to macOS and shows no iOS simulator destinations.
+- **`ShieldActionExtension.swift`**: Updated `handle(for:)` overrides from `Application`/`WebDomain` to `ApplicationToken`/`WebDomainToken` — iOS 26 SDK changed `ShieldActionDelegate` to use opaque token types.
+- **`DeviceActivityMonitorExtension.swift`**: Added `import Foundation` — `UUID` and `Date` are not implicitly available without it.
+- **`InterventionView.swift`**: Inlined the default string in the public `init` — Swift 5.9+ disallows `private` (or `internal`) static properties as default argument values in `public` initializers across module boundaries.
+- **Extension `Info.plist` files** (all 3): Added `CFBundleIdentifier = $(PRODUCT_BUNDLE_IDENTIFIER)` — without it the built `.appex` has no bundle ID and the parent-app prefix check fails at install time.
+- **Simulator install limitation**: All three `.appex` targets (DeviceActivityMonitor, ShieldConfiguration, ShieldAction) fail `xcrun simctl install` with "Invalid placeholder attributes / Failed to create promise" — the simulator rejects FamilyControls/ManagedSettings extension points. Workaround: copy the `.app` bundle to `/tmp`, strip all `PlugIns/*.appex`, and install the stripped copy. Extensions build correctly and would deploy to a real device with proper provisioning. `EXAppExtensionAttributes` was tried in `DeviceActivityMonitor/Info.plist` and removed — it did not fix the issue.
+
 ## Security & Configuration Tips
 
 - Do not claim unsupported platform capabilities in docs or UI copy — see `ios/APP_REVIEW_PREFLIGHT.md` Section 3 (prohibited copy) and Section 2 (cannot-claim rows).
@@ -97,7 +124,7 @@ Git repo is live at `github.com/gheatherington/freesocial`.
 
 **Resolve before Phase 3 begins:**
 1. Decide ConsentManager AppGroup access pattern — options: inject `suiteName` via init, add PolicyStore as a ConsentManager dependency, or create a shared Foundation package. This blocks POL-02 end-to-end implementation.
-2. Set up CI with Xcode.app to confirm `xcodebuild BUILD SUCCEEDED` — all static checks pass but runtime build has not been verified.
+2. ~~Set up CI with Xcode.app to confirm `xcodebuild BUILD SUCCEEDED`~~ — **DONE 2026-03-04**. Build succeeds on iOS 26.2 simulator. See iOS 26 SDK fixes below.
 
 **Start next milestone:**
 ```

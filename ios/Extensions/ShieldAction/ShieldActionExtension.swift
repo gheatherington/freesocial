@@ -4,7 +4,7 @@ import PolicyStore
 final class ShieldActionExtension: ShieldActionDelegate {
     override func handle(
         action: ShieldAction,
-        for application: Application,
+        for application: ApplicationToken,
         completionHandler: @escaping (ShieldActionResponse) -> Void
     ) {
         // Stub: defer to PolicyStore for action decision
@@ -14,7 +14,7 @@ final class ShieldActionExtension: ShieldActionDelegate {
 
     override func handle(
         action: ShieldAction,
-        for webDomain: WebDomain,
+        for webDomain: WebDomainToken,
         completionHandler: @escaping (ShieldActionResponse) -> Void
     ) {
         completionHandler(.close)

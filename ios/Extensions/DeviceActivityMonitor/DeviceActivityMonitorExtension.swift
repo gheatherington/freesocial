@@ -1,4 +1,5 @@
 import DeviceActivity
+import Foundation
 import ManagedSettings
 import PolicyStore
 
