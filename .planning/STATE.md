@@ -25,9 +25,10 @@ See: .planning/PROJECT.md (updated 2026-03-03 after v1.0 milestone)
 
 ## Current Position
 
-Phase: Planning
-Status: v1.0 shipped — ready for next milestone
-Last activity: 2026-03-03 — Completed v1.0 Foundation milestone
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-03-04 — Milestone v1.1 started
 
 Progress: [----------] 0% (fresh milestone)
 
