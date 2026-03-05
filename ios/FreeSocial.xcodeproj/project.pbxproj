@@ -17,6 +17,7 @@
 		/* DeviceActivityMonitor extension */
 		A102000100000001 /* DeviceActivityMonitorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102000200000001 /* DeviceActivityMonitorExtension.swift */; };
 		A102000100000010 /* PolicyStore in Frameworks (DAM) */ = {isa = PBXBuildFile; productRef = A102000500000001 /* PolicyStore */; };
+		A102000100000011 /* ConsentManager in Frameworks (DAM) */ = {isa = PBXBuildFile; productRef = A102000500000002 /* ConsentManager */; };
 		A102000100000020 /* DeviceActivityMonitor.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A102000200000005 /* DeviceActivityMonitor.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		/* ShieldConfiguration extension */
 		A103000100000001 /* ShieldConfigurationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A103000200000001 /* ShieldConfigurationExtension.swift */; };
@@ -132,6 +133,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A102000100000010 /* PolicyStore in Frameworks (DAM) */,
+				A102000100000011 /* ConsentManager in Frameworks (DAM) */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +328,7 @@
 			name = DeviceActivityMonitor;
 			packageProductDependencies = (
 				A102000500000001 /* PolicyStore */,
+				A102000500000002 /* ConsentManager */,
 			);
 			productName = DeviceActivityMonitor;
 			productReference = A102000200000005 /* DeviceActivityMonitor.appex */;
@@ -1056,6 +1059,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A101000800000003 /* XCLocalSwiftPackageReference "Packages/PolicyStore" */;
 			productName = PolicyStore;
+		};
+		A102000500000002 /* ConsentManager (DAM) */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A101000800000004 /* XCLocalSwiftPackageReference "Packages/ConsentManager" */;
+			productName = ConsentManager;
 		};
 		A104000500000001 /* PolicyStore (SA) */ = {
 			isa = XCSwiftPackageProductDependency;
