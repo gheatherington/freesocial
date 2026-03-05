@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Implementation
 status: executing
-stopped_at: Completed 04-01-PLAN.md
-last_updated: "2026-03-05T21:41:52.748Z"
-last_activity: 2026-03-05 — Plan 03-02 complete — PolicyRepository + FamilyActivitySelectionStore persistence shipped
+stopped_at: Completed 04-02-PLAN.md
+last_updated: "2026-03-05T21:44:12.243Z"
+last_activity: 2026-03-05 — Plan 04-01 complete — AuthorizationManager real impl + deauth cleanup shipped
 progress:
   total_phases: 5
   completed_phases: 1
   total_plans: 8
-  completed_plans: 5
-  percent: 50
+  completed_plans: 6
+  percent: 63
 ---
 
 # Project State
@@ -57,6 +57,8 @@ Key decisions carried forward from v1.0 (see PROJECT.md Key Decisions for full l
 - [Phase 03-data-layer-foundations]: Negative-path assertions added to UAT stubs for DATA-01/02 requirement traceability
 - [Phase 04-screen-time-engine]: os(iOS) guard chosen over canImport(FamilyControls) for ScreenTimeEngine — ManagedSettingsStore/DeviceActivityCenter unavailable on macOS even when importable
 - [Phase 04-screen-time-engine]: simulateStatusChange(to:) test seam added to AuthorizationManager — enables deterministic deauth cleanup tests without FamilyControls runtime
+- [Phase 04-screen-time-engine]: buildMonitoringConfiguration() returns pure MonitoringConfiguration value type for host-side threshold-mapping assertions without DeviceActivity runtime
+- [Phase 04-screen-time-engine]: ScreenTimeEngine.EventName sub-enum added for instagramDailyLimit/tiktokDailyLimit constants — extends 04-01 namespace without renaming
 
 ### Research Flags (active risks)
 
@@ -75,6 +77,6 @@ None — all pre-Phase-3 blockers resolved as of 2026-03-04.
 
 ## Session Continuity
 
-Last session: 2026-03-05T21:41:52.745Z
-Stopped at: Completed 04-01-PLAN.md
+Last session: 2026-03-05T21:44:12.241Z
+Stopped at: Completed 04-02-PLAN.md
 Resume file: None
