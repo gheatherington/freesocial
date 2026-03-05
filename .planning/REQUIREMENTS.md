@@ -28,9 +28,9 @@ Requirements for the Implementation milestone. Each maps to roadmap phases.
 
 ### Data Layer (DATA)
 
-- [ ] **DATA-01**: User consent status is persisted and accessible across app and extension processes via App Group
-- [ ] **DATA-02**: User can revoke consent, which blocks further bypass event telemetry writes
-- [ ] **DATA-03**: Bypass events and escalation state are persisted via PolicyRepository to App Group
+- [x] **DATA-01**: User consent status is persisted and accessible across app and extension processes via App Group
+- [x] **DATA-02**: User can revoke consent, which blocks further bypass event telemetry writes
+- [x] **DATA-03**: Bypass events and escalation state are persisted via PolicyRepository to App Group
 
 ### Dashboard (DASH)
 
@@ -80,9 +80,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DATA-01 | Phase 3 | Pending |
-| DATA-02 | Phase 3 | Pending |
-| DATA-03 | Phase 3 | Pending |
+| DATA-01 | Phase 3 | Complete |
+| DATA-02 | Phase 3 | Complete |
+| DATA-03 | Phase 3 | Complete |
 | ENFC-01 | Phase 4 | Pending |
 | FEED-01 | Phase 5 | Pending |
 | FEED-02 | Phase 5 | Pending |

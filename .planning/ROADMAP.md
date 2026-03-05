@@ -94,7 +94,7 @@ Phases execute in numeric order: 3 → 4 → 5 → 6 → 7
 |-------|-----------|----------------|--------|-----------|
 | 1. Controlled Client + Native Blocking | v1.0 | 4/4 | Complete | 2026-03-03 |
 | 2. iOS Implementation Scaffolding | v1.0 | 4/4 | Complete | 2026-03-03 |
-| 3. Data Layer Foundations | v1.1 | 0/? | Not started | — |
+| 3. Data Layer Foundations | 1/4 | In Progress|  | — |
 | 4. Screen Time Engine | v1.1 | 0/? | Not started | — |
 | 5. WKWebView Controlled Feed | v1.1 | 0/? | Not started | — |
 | 6. Onboarding Flow | v1.1 | 0/? | Not started | — |
