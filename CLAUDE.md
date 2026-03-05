@@ -152,23 +152,52 @@ Created Phase 3 planning artifacts. All architectural decisions for the data lay
 - `.planning/phases/03-data-layer-foundations/` — phase directory
 - `.planning/phases/03-data-layer-foundations/03-CONTEXT.md` — implementation decisions
 
+## Session Updates (2026-03-05, Phase 3 planned)
+
+Planned Phase 3 end-to-end using the plan-phase workflow with research and verification loop.
+
+**Planning outputs:**
+- `.planning/phases/03-data-layer-foundations/03-RESEARCH.md` — technical implementation research for DATA-01/02/03
+- `.planning/phases/03-data-layer-foundations/03-01-PLAN.md` — ConsentStore + AuditLog persistence and tests
+- `.planning/phases/03-data-layer-foundations/03-02-PLAN.md` — PolicyRepository + FamilyActivitySelectionStore persistence
+- `.planning/phases/03-data-layer-foundations/03-03-PLAN.md` — DeviceActivityMonitor consent-gate integration and boundary tests
+- `.planning/phases/03-data-layer-foundations/03-04-PLAN.md` — verification matrix and evidence artifact generation
+
+**Verification loop result:**
+- Initial checker pass reported 2 gaps (DATA-02 extension-boundary verification, DATA-01 cross-process verification detail).
+- Plans 03-03 and 03-04 were revised to add explicit boundary and cross-process verification requirements.
+- Final checker pass: `## VERIFICATION PASSED`.
+
+## Session Updates (2026-03-05, Phase 3 executed)
+
+Executed Phase 3 end-to-end. All 4 plans complete, verification passed 14/14.
+
+**Plans executed:**
+- `03-01` — ConsentStore + AuditLog App Group persistence; revocation semantics; 16 tests (6 ConsentStorePersistenceTests, 5 AuditLogPersistenceTests, 4 ConsentManagerUATStubs, 1 placeholder)
+- `03-02` — PolicyRepository escalation/bypass persistence; FamilyActivitySelectionStore with `#if os(iOS)` guards for macOS `swift test` compatibility; 16 PolicyStore tests
+- `03-03` — DeviceActivityMonitor consent gate wired to real `ConsentStore(suiteName: AppGroup.suiteName)`; `shouldRecordBypassEvent(for:)` extracted to testable helper in `DeviceActivityMonitorExtension+Testing.swift`; 3 DATA-02 boundary tests (nil blocks, revoked blocks, active allows)
+- `03-04` — Negative-path UAT assertions added; `03-VERIFICATION.md` published with full DATA-01/02/03 evidence
+
+**Fix applied during execution:**
+- `ios/Packages/ConsentManager/Package.swift`: Added `.macOS(.v13)` to platforms — same host-testability fix as ControlledClient. SourceKit and `swift test` both require macOS in platforms when running tests on the host machine.
+
+**Verification:** `03-VERIFICATION.md` — passed, 14/14 must-haves. DATA-01, DATA-02, DATA-03 all satisfied.
+
+**Deferred (noted in VERIFICATION.md):** FAS `hasSelection == true` path (requires real device + FamilyControls authorization); real-device cross-process coverage.
+
 ## Current Project Status (GSD)
 
 - **Milestone:** v1.1 Implementation — IN PROGRESS
-- **Stage:** Phase 3 context captured — ready to plan
+- **Stage:** Phase 3 complete — ready to plan Phase 4
 - **Git tag:** `v1.0` (last shipped)
-- **Phase 3 context:** `.planning/phases/03-data-layer-foundations/03-CONTEXT.md`
+- **Phase 3 artifacts:** `.planning/phases/03-data-layer-foundations/` — 4 SUMMARYs + VERIFICATION.md
 
 ## What To Do Next
 
-**Plan Phase 3:**
+**Plan Phase 4:**
 ```
-/gsd:plan-phase 3
+/gsd:plan-phase 4
 ```
 Then `/clear` first for a fresh context window.
 
-**Phase 3 implementation decisions (from 03-CONTEXT.md):**
-- `FamilyActivitySelectionStore` → new type in `PolicyStore` package
-- `ConsentStore.loadCurrent()` returns record even when revoked; callers check `?.isRevoked == false`
-- `AuditLog` persists to App Group UserDefaults via JSONEncoder (not a file)
-- `BypassEvent` schema unchanged — no expansion needed for v1.1
+**Phase 4 scope:** Screen Time Engine — real FamilyControls authorization, scheduling, and shield enforcement (requirement ENFC-01).
