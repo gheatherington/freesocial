@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Implementation
-status: in-progress
-stopped_at: Completed 03-01-PLAN.md
-last_updated: "2026-03-05T20:16:34.607Z"
-last_activity: 2026-03-05 — Phase 3 Plan 01 complete — ConsentStore + AuditLog persistence implemented
+status: executing
+stopped_at: Completed 03-02-PLAN.md
+last_updated: "2026-03-05T20:24:28.840Z"
+last_activity: 2026-03-05 — Plan 03-01 complete — ConsentStore + AuditLog persistence shipped
 progress:
   total_phases: 5
   completed_phases: 0
   total_plans: 4
-  completed_plans: 1
-  percent: 25
+  completed_plans: 2
+  percent: 50
 ---
 
 # Project State
@@ -21,23 +21,23 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-04 after v1.1 milestone start)
 
 **Core value:** Users can stay connected without compulsive feed consumption.
-**Current focus:** Phase 3 — Data Layer Foundations (Plan 01 done, Plan 02 next)
+**Current focus:** Phase 3 — Data Layer Foundations (Plan 02 done, Plan 03 next)
 
 ## Current Position
 
 Phase: 3 of 7 (Data Layer Foundations)
-Plan: 02 of 04 (next: PolicyRepository + FamilyActivitySelectionStore)
-Status: In Progress — Plan 01 complete
-Last activity: 2026-03-05 — Plan 03-01 complete — ConsentStore + AuditLog persistence shipped
+Plan: 03 of 04 (next: DeviceActivityMonitor consent-gate integration)
+Status: In Progress — Plan 02 complete
+Last activity: 2026-03-05 — Plan 03-02 complete — PolicyRepository + FamilyActivitySelectionStore persistence shipped
 
-Progress: [███░░░░░░░] 25% (1/4 plans complete)
+Progress: [█████░░░░░] 50% (2/4 plans complete)
 
 ## Performance Metrics
 
 - v1.0 total plans: 8
 - v1.0 Swift LOC: 679
 - v1.0 timeline: 1 day (2026-03-03)
-- v1.1 plans completed: 1
+- v1.1 plans completed: 2
 
 ## Accumulated Context
 
@@ -51,6 +51,8 @@ Key decisions carried forward from v1.0 (see PROJECT.md Key Decisions for full l
 - Dashboard uses local session counters as primary data source — DeviceActivityReport extension is optional (v1.2)
 - Screen Time shield-only blocking (no escalation in v1.1) — EscalationLevel wiring deferred to v1.2
 - [Phase 03-data-layer-foundations]: AuditLog.init requires suiteName param — parallel to ConsentStore; allEntries() added as public read API
+- [Phase 03-data-layer-foundations]: os(iOS) guard chosen over canImport(FamilyControls) for PolicyStore — more reliable on macOS swift test
+- [Phase 03-data-layer-foundations]: setEscalationLevel added as public PolicyRepository API — required for test assertions and Phase 4 transitions
 
 ### Research Flags (active risks)
 
@@ -69,6 +71,6 @@ None — all pre-Phase-3 blockers resolved as of 2026-03-04.
 
 ## Session Continuity
 
-Last session: 2026-03-05T20:16:34.605Z
-Stopped at: Completed 03-01-PLAN.md
-Resume file: .planning/phases/03-data-layer-foundations/03-02-PLAN.md
+Last session: 2026-03-05T20:24:12.003Z
+Stopped at: Completed 03-02-PLAN.md
+Resume file: .planning/phases/03-data-layer-foundations/03-03-PLAN.md
