@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Implementation
 status: executing
-stopped_at: Completed 03-02-PLAN.md
-last_updated: "2026-03-05T20:24:28.840Z"
-last_activity: 2026-03-05 — Plan 03-01 complete — ConsentStore + AuditLog persistence shipped
+stopped_at: Completed 03-03-PLAN.md
+last_updated: "2026-03-05T20:28:12.647Z"
+last_activity: 2026-03-05 — Plan 03-02 complete — PolicyRepository + FamilyActivitySelectionStore persistence shipped
 progress:
   total_phases: 5
   completed_phases: 0
   total_plans: 4
-  completed_plans: 2
+  completed_plans: 3
   percent: 50
 ---
 
@@ -53,6 +53,7 @@ Key decisions carried forward from v1.0 (see PROJECT.md Key Decisions for full l
 - [Phase 03-data-layer-foundations]: AuditLog.init requires suiteName param — parallel to ConsentStore; allEntries() added as public read API
 - [Phase 03-data-layer-foundations]: os(iOS) guard chosen over canImport(FamilyControls) for PolicyStore — more reliable on macOS swift test
 - [Phase 03-data-layer-foundations]: setEscalationLevel added as public PolicyRepository API — required for test assertions and Phase 4 transitions
+- [Phase 03-data-layer-foundations]: Test seam as shared source file: shouldRecordBypassEvent compiled into both DAM extension and FreeSocialTests targets
 
 ### Research Flags (active risks)
 
@@ -71,6 +72,6 @@ None — all pre-Phase-3 blockers resolved as of 2026-03-04.
 
 ## Session Continuity
 
-Last session: 2026-03-05T20:24:12.003Z
-Stopped at: Completed 03-02-PLAN.md
-Resume file: .planning/phases/03-data-layer-foundations/03-03-PLAN.md
+Last session: 2026-03-05T20:28:12.645Z
+Stopped at: Completed 03-03-PLAN.md
+Resume file: None
