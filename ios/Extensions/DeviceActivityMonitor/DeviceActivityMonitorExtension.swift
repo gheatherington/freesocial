@@ -1,3 +1,4 @@
+import ConsentManager
 import DeviceActivity
 import Foundation
 import ManagedSettings
@@ -21,11 +22,12 @@ final class DeviceActivityMonitorExtension: DeviceActivityMonitor {
         _ event: DeviceActivityEvent.Name,
         activity: DeviceActivityName
     ) {
-        // Consent gate: only record bypass events when the user has granted consent.
-        // Phase 2 stub — ConsentStore wiring deferred to Phase 3.
-        // TODO(Phase 3): replace with ConsentStore(suiteName: AppGroup.suiteName).loadCurrent() != nil
-        let consentIsGranted: Bool = true
-        guard consentIsGranted else { return }
+        // DATA-02: Only record bypass events when the user has active consent.
+        // Reads persisted ConsentRecord from App Group shared container.
+        // nil → never consented; isRevoked == true → consent revoked.
+        // Both cases skip bypass telemetry to honor revocation semantics.
+        let store = ConsentStore(suiteName: AppGroup.suiteName)
+        guard shouldRecordBypassEvent(for: store) else { return }
 
         let bypassEvent = BypassEvent(
             id: UUID(),
