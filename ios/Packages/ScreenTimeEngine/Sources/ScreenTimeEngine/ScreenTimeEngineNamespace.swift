@@ -11,6 +11,15 @@ public enum ScreenTimeEngine {
     /// Named ManagedSettingsStore identifier used by the extension shield path.
     /// Must match across main app and extension targets.
     public static let managedStoreIdentifier = "freesocial.shields"
+
+    /// Stable DeviceActivityEvent.Name raw value strings.
+    /// Centralizing here prevents string drift between ActivityScheduler and the extension callback.
+    public enum EventName {
+        /// Threshold event delivered when the Instagram daily usage limit is reached.
+        public static let instagramDailyLimit = "freesocial.event.instagram.daily"
+        /// Threshold event delivered when the TikTok daily usage limit is reached.
+        public static let tiktokDailyLimit    = "freesocial.event.tiktok.daily"
+    }
 }
 
 // MARK: - AuthorizationStatus
