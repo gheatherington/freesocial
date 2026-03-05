@@ -60,6 +60,15 @@ final class ConsentManagerUATStubs: XCTestCase {
         XCTAssertEqual(loaded?.id, record.id)
     }
 
+    // MARK: - DATA-01 negative path: never consented returns nil
+
+    /// DATA-01: loadCurrent() returns nil when no record has ever been saved.
+    /// Nil is reserved for "never consented" — distinct from a revoked record.
+    func testNeverConsentedReturnsNilFromLoadCurrent() {
+        let store = ConsentStore(suiteName: suiteName)
+        XCTAssertNil(store.loadCurrent(), "DATA-01: loadCurrent() must return nil when no consent record exists")
+    }
+
     // MARK: - DATA-02: AuditLog append persistence
 
     /// DATA-02: Appended audit entries are stored and retrievable in insertion order.
@@ -72,5 +81,16 @@ final class ConsentManagerUATStubs: XCTestCase {
         XCTAssertEqual(entries.count, 2)
         XCTAssertEqual(entries[0].action, "consent.granted")
         XCTAssertEqual(entries[1].action, "consent.revoked")
+    }
+
+    // MARK: - DATA-02 negative path: corrupt payload falls back to empty
+
+    /// DATA-02: AuditLog treats undecodable stored data as an empty log (graceful degradation).
+    func testAuditLogCorruptPayloadFallsBackToEmpty() {
+        let defaults = UserDefaults(suiteName: suiteName)!
+        // Write raw garbage bytes to the AuditLog storage key
+        defaults.set("not-valid-json".data(using: .utf8)!, forKey: "com.freesocial.consent.auditLog")
+        let log = AuditLog(suiteName: suiteName)
+        XCTAssertEqual(log.allEntries().count, 0, "DATA-02: Corrupt audit log payload must yield empty entries")
     }
 }
