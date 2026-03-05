@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Implementation
 status: executing
-stopped_at: Completed 03-04-PLAN.md
-last_updated: "2026-03-05T20:39:32.245Z"
+stopped_at: Completed 04-01-PLAN.md
+last_updated: "2026-03-05T21:41:52.748Z"
 last_activity: 2026-03-05 — Plan 03-02 complete — PolicyRepository + FamilyActivitySelectionStore persistence shipped
 progress:
   total_phases: 5
   completed_phases: 1
-  total_plans: 4
-  completed_plans: 4
+  total_plans: 8
+  completed_plans: 5
   percent: 50
 ---
 
@@ -21,23 +21,23 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-04 after v1.1 milestone start)
 
 **Core value:** Users can stay connected without compulsive feed consumption.
-**Current focus:** Phase 3 — Data Layer Foundations (Plan 02 done, Plan 03 next)
+**Current focus:** Phase 4 — Screen Time Engine (Plan 01 done, Plan 02 next)
 
 ## Current Position
 
-Phase: 3 of 7 (Data Layer Foundations)
-Plan: 03 of 04 (next: DeviceActivityMonitor consent-gate integration)
-Status: In Progress — Plan 02 complete
-Last activity: 2026-03-05 — Plan 03-02 complete — PolicyRepository + FamilyActivitySelectionStore persistence shipped
+Phase: 4 of 7 (Screen Time Engine)
+Plan: 02 of 04 (next: ActivityScheduler API redesign + schedule/event registration)
+Status: In Progress — Plan 01 complete
+Last activity: 2026-03-05 — Plan 04-01 complete — AuthorizationManager real impl + deauth cleanup shipped
 
-Progress: [█████░░░░░] 50% (2/4 plans complete)
+Progress: [██████░░░░] 63% (5/8 plans complete)
 
 ## Performance Metrics
 
 - v1.0 total plans: 8
 - v1.0 Swift LOC: 679
 - v1.0 timeline: 1 day (2026-03-03)
-- v1.1 plans completed: 2
+- v1.1 plans completed: 5
 
 ## Accumulated Context
 
@@ -55,6 +55,8 @@ Key decisions carried forward from v1.0 (see PROJECT.md Key Decisions for full l
 - [Phase 03-data-layer-foundations]: setEscalationLevel added as public PolicyRepository API — required for test assertions and Phase 4 transitions
 - [Phase 03-data-layer-foundations]: Test seam as shared source file: shouldRecordBypassEvent compiled into both DAM extension and FreeSocialTests targets
 - [Phase 03-data-layer-foundations]: Negative-path assertions added to UAT stubs for DATA-01/02 requirement traceability
+- [Phase 04-screen-time-engine]: os(iOS) guard chosen over canImport(FamilyControls) for ScreenTimeEngine — ManagedSettingsStore/DeviceActivityCenter unavailable on macOS even when importable
+- [Phase 04-screen-time-engine]: simulateStatusChange(to:) test seam added to AuthorizationManager — enables deterministic deauth cleanup tests without FamilyControls runtime
 
 ### Research Flags (active risks)
 
@@ -73,6 +75,6 @@ None — all pre-Phase-3 blockers resolved as of 2026-03-04.
 
 ## Session Continuity
 
-Last session: 2026-03-05T20:34:14.077Z
-Stopped at: Completed 03-04-PLAN.md
+Last session: 2026-03-05T21:41:52.745Z
+Stopped at: Completed 04-01-PLAN.md
 Resume file: None

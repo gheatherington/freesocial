@@ -24,7 +24,7 @@ Requirements for the Implementation milestone. Each maps to roadmap phases.
 
 ### Enforcement (ENFC)
 
-- [ ] **ENFC-01**: User is blocked from native Instagram/TikTok by Screen Time shield when daily limit is reached
+- [x] **ENFC-01**: User is blocked from native Instagram/TikTok by Screen Time shield when daily limit is reached
 
 ### Data Layer (DATA)
 
@@ -83,7 +83,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DATA-01 | Phase 3 | Complete |
 | DATA-02 | Phase 3 | Complete |
 | DATA-03 | Phase 3 | Complete |
-| ENFC-01 | Phase 4 | Pending |
+| ENFC-01 | Phase 4 | Complete |
 | FEED-01 | Phase 5 | Pending |
 | FEED-02 | Phase 5 | Pending |
 | FEED-03 | Phase 5 | Pending |
