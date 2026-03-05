@@ -21,7 +21,7 @@ See full details: `.planning/milestones/v1.0-ROADMAP.md`
 
 **Milestone Goal:** Convert scaffolded skeleton into a working app — real persistence, real Screen Time enforcement, a live WKWebView feed, onboarding that gates through authorization and consent, and a UAT test pass that proves every v1.1 requirement is met.
 
-- [ ] **Phase 3: Data Layer Foundations** — Real persistence for ConsentStore and PolicyRepository across app and extension processes
+- [x] **Phase 3: Data Layer Foundations** — Real persistence for ConsentStore and PolicyRepository across app and extension processes (completed 2026-03-05)
 - [ ] **Phase 4: Screen Time Engine** — Real FamilyControls authorization, scheduling, and shield enforcement
 - [ ] **Phase 5: WKWebView Controlled Feed** — Live Instagram and TikTok feed with session timer and InterventionView trigger
 - [ ] **Phase 6: Onboarding Flow** — Sequential 4-step integration: auth request, consent/disclosure, platform selection, session limit setup
@@ -94,7 +94,7 @@ Phases execute in numeric order: 3 → 4 → 5 → 6 → 7
 |-------|-----------|----------------|--------|-----------|
 | 1. Controlled Client + Native Blocking | v1.0 | 4/4 | Complete | 2026-03-03 |
 | 2. iOS Implementation Scaffolding | v1.0 | 4/4 | Complete | 2026-03-03 |
-| 3. Data Layer Foundations | 3/4 | In Progress|  | — |
+| 3. Data Layer Foundations | 4/4 | Complete   | 2026-03-05 | — |
 | 4. Screen Time Engine | v1.1 | 0/? | Not started | — |
 | 5. WKWebView Controlled Feed | v1.1 | 0/? | Not started | — |
 | 6. Onboarding Flow | v1.1 | 0/? | Not started | — |
