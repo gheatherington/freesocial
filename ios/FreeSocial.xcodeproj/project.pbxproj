@@ -32,6 +32,8 @@
 		A110000100000003 /* DeviceActivityMonitorExtension+Testing.swift in Sources (FreeSocialTests) */ = {isa = PBXBuildFile; fileRef = A102000200000004 /* DeviceActivityMonitorExtension+Testing.swift */; };
 		A102000100000002 /* DeviceActivityMonitorExtension+Testing.swift in Sources (DAM) */ = {isa = PBXBuildFile; fileRef = A102000200000004 /* DeviceActivityMonitorExtension+Testing.swift */; };
 		A110000100000010 /* ConsentManager in Frameworks (FreeSocialTests) */ = {isa = PBXBuildFile; productRef = A110000500000001 /* ConsentManager */; };
+		A110000100000004 /* ShieldManagerTokenAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A110000200000004 /* ShieldManagerTokenAPITests.swift */; };
+		A110000100000011 /* ScreenTimeEngine in Frameworks (FreeSocialTests) */ = {isa = PBXBuildFile; productRef = A110000500000002 /* ScreenTimeEngine (FreeSocialTests) */; };
 		/* FreeSocialUITests UITest target */
 		A111000100000001 /* FreeSocialUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A111000200000001 /* FreeSocialUITests.swift */; };
 		A111000100000010 /* FreeSocial.app in Frameworks (UITests) */ = {isa = PBXBuildFile; fileRef = A101000200000005 /* FreeSocial.app */; };
@@ -116,6 +118,7 @@
 		/* FreeSocialTests unit test target */
 		A110000200000001 /* AppReviewPreflightTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReviewPreflightTests.swift; sourceTree = "<group>"; };
 		A110000200000002 /* DeviceActivityMonitorConsentGateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceActivityMonitorConsentGateTests.swift; sourceTree = "<group>"; };
+		A110000200000004 /* ShieldManagerTokenAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldManagerTokenAPITests.swift; sourceTree = "<group>"; };
 		A110000200000005 /* FreeSocialTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FreeSocialTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		/* FreeSocialUITests UITest target */
 		A111000200000001 /* FreeSocialUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeSocialUITests.swift; sourceTree = "<group>"; };
@@ -163,6 +166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A110000100000010 /* ConsentManager in Frameworks (FreeSocialTests) */,
+				A110000100000011 /* ScreenTimeEngine in Frameworks (FreeSocialTests) */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +257,7 @@
 			children = (
 				A110000200000001 /* AppReviewPreflightTests.swift */,
 				A110000200000002 /* DeviceActivityMonitorConsentGateTests.swift */,
+				A110000200000004 /* ShieldManagerTokenAPITests.swift */,
 			);
 			path = FreeSocialTests;
 			sourceTree = "<group>";
@@ -395,6 +400,7 @@
 			name = FreeSocialTests;
 			packageProductDependencies = (
 				A110000500000001 /* ConsentManager */,
+				A110000500000002 /* ScreenTimeEngine (FreeSocialTests) */,
 			);
 			productName = FreeSocialTests;
 			productReference = A110000200000005 /* FreeSocialTests.xctest */;
@@ -533,6 +539,7 @@
 				A110000100000001 /* AppReviewPreflightTests.swift in Sources */,
 				A110000100000002 /* DeviceActivityMonitorConsentGateTests.swift in Sources */,
 				A110000100000003 /* DeviceActivityMonitorExtension+Testing.swift in Sources (FreeSocialTests) */,
+				A110000100000004 /* ShieldManagerTokenAPITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1087,6 +1094,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A101000800000004 /* XCLocalSwiftPackageReference "Packages/ConsentManager" */;
 			productName = ConsentManager;
+		};
+		A110000500000002 /* ScreenTimeEngine (FreeSocialTests) */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A101000800000002 /* XCLocalSwiftPackageReference "Packages/ScreenTimeEngine" */;
+			productName = ScreenTimeEngine;
 		};
 /* End XCSwiftPackageProductDependency section */
 
