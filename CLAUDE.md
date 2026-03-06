@@ -185,19 +185,66 @@ Executed Phase 3 end-to-end. All 4 plans complete, verification passed 14/14.
 
 **Deferred (noted in VERIFICATION.md):** FAS `hasSelection == true` path (requires real device + FamilyControls authorization); real-device cross-process coverage.
 
+## Session Updates (2026-03-05, Phase 4 planned)
+
+Planned Phase 4 end-to-end using the plan-phase workflow with research and verification loop.
+
+**Phase:** `04-screen-time-engine` (`ENFC-01`)
+
+**Context gate decision:**
+- No `04-CONTEXT.md` existed at planning time.
+- Chose to continue without discuss-phase context and plan from requirements + research.
+
+**Artifacts created:**
+- `.planning/phases/04-screen-time-engine/04-RESEARCH.md`
+- `.planning/phases/04-screen-time-engine/04-VALIDATION.md`
+- `.planning/phases/04-screen-time-engine/04-01-PLAN.md`
+- `.planning/phases/04-screen-time-engine/04-02-PLAN.md`
+- `.planning/phases/04-screen-time-engine/04-03-PLAN.md`
+- `.planning/phases/04-screen-time-engine/04-04-PLAN.md`
+
+**Verification loop result:**
+- Initial checker pass reported 2 gaps:
+  - wave-1 file ownership conflicts between `04-01` and `04-02`
+  - missing explicit per-platform threshold enforcement in `04-02`
+- Revision pass fixed file ownership and made Instagram/TikTok threshold mapping explicit.
+- Second checker pass reported 2 additional gaps:
+  - missing `PolicyStore` dependency wiring in `ios/Packages/ScreenTimeEngine/Package.swift`
+  - dependency sequencing conflict (`04-02` consuming `04-01` namespace outputs without `depends_on`)
+- Final revision added package-manifest wiring scope and set `04-02 depends_on: ["04-01"]`.
+- Final checker pass: `## VERIFICATION PASSED`.
+
+## Session Updates (2026-03-06, Phase 4 executed)
+
+Executed Phase 4 end-to-end. All 4 plans complete, verification 4/4 must-haves (2 real-device items deferred per v1.1 scope).
+
+**Plans executed:**
+- `04-01` — `AuthorizationManager` rewritten with real `FamilyControls` auth request/deauth flow; `ScreenTimeEngineNamespace.swift` added (centralized constants + platform-agnostic types); 5 deterministic tests
+- `04-02` — `ActivityScheduler` fully implemented with per-platform threshold mapping (Instagram/TikTok → named `DeviceActivityEvent`s); `PolicyStore` added as package dependency to `ScreenTimeEngine/Package.swift`; 8 tests
+- `04-03` — `ShieldManager` rewritten with `Set<ApplicationToken>` + named `ManagedSettingsStore`; `shouldApplyShields()` 3-gate guard (consent + tokens + 30s premature-event window) wired into `eventDidReachThreshold`; 5 boundary tests
+- `04-04` — 9 ENFC-01 assertion tests replacing `XCTSkip` placeholder; `04-VALIDATION.md` marked `nyquist_compliant: true`; `04-VERIFICATION.md` + `04-PHASE-VERIFICATION.md` with 4-link evidence chain published
+
+**Fixes applied during execution:**
+- `#if os(iOS)` guards used throughout `ScreenTimeEngine` (replacing `canImport(FamilyControls)` which was insufficient — APIs marked `@available unavailable` on macOS even when importable)
+- `ScreenTimeEngine/Package.swift`: Added `.macOS(.v13)` to platforms for host testability
+- `ApplicationToken` aliased to `AnyHashable` on macOS in `ShieldManager` to allow package host compilation
+
+**Verification:** `04-PHASE-VERIFICATION.md` — `human_needed`, 4/4 must-haves. Two real-device items (FamilyControls auth sheet appearance, real-token shield overlay) explicitly deferred to v1.2 per REQUIREMENTS.md out-of-scope.
+
 ## Current Project Status (GSD)
 
 - **Milestone:** v1.1 Implementation — IN PROGRESS
-- **Stage:** Phase 3 complete — ready to plan Phase 4
+- **Stage:** Phase 4 complete — ready to execute Phase 5
 - **Git tag:** `v1.0` (last shipped)
 - **Phase 3 artifacts:** `.planning/phases/03-data-layer-foundations/` — 4 SUMMARYs + VERIFICATION.md
+- **Phase 4 artifacts:** `.planning/phases/04-screen-time-engine/` — 4 SUMMARYs + VERIFICATION.md + PHASE-VERIFICATION.md
 
 ## What To Do Next
 
-**Plan Phase 4:**
+**Execute Phase 5:**
 ```
-/gsd:plan-phase 4
+/gsd:execute-phase 5
 ```
-Then `/clear` first for a fresh context window.
+`/clear` first for a fresh context window.
 
-**Phase 4 scope:** Screen Time Engine — real FamilyControls authorization, scheduling, and shield enforcement (requirement ENFC-01).
+**Phase 5 scope:** WKWebView Controlled Feed — live Instagram/TikTok feed, session timer, InterventionView trigger. Requirements: FEED-01, FEED-02, FEED-03, FEED-04, DASH-02.

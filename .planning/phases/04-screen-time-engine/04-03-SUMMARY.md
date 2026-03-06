@@ -130,6 +130,14 @@ None — no external service configuration required.
 - Plan 04-04 (verification matrix + evidence artifact) can now generate ENFC-01 evidence
 - Real-device verification of `selection.applicationTokens` shield path deferred (requires FamilyControls authorization grant on device)
 
+## Self-Check: PASSED
+
+- SUMMARY.md: FOUND at `.planning/phases/04-screen-time-engine/04-03-SUMMARY.md`
+- Commit c31ee69: FOUND (feat: ShieldManager token API)
+- Commit 172d555: FOUND (feat: threshold callback enforcement)
+- ShieldManager.swift: FOUND
+- DeviceActivityThresholdGuardTests.swift: FOUND
+
 ---
 *Phase: 04-screen-time-engine*
 *Completed: 2026-03-06*
