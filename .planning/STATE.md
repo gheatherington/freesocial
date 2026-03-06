@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Implementation
 status: executing
-stopped_at: Completed 04-03-PLAN.md
-last_updated: "2026-03-06T12:30:19.352Z"
+stopped_at: Completed 04-04-PLAN.md
+last_updated: "2026-03-06T12:47:06.512Z"
 last_activity: 2026-03-05 — Plan 04-01 complete — AuthorizationManager real impl + deauth cleanup shipped
 progress:
   total_phases: 5
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 8
-  completed_plans: 7
+  completed_plans: 8
   percent: 63
 ---
 
@@ -62,6 +62,8 @@ Key decisions carried forward from v1.0 (see PROJECT.md Key Decisions for full l
 - [Phase 04-screen-time-engine]: shieldApps returns Bool: true=shields applied, false=empty set no-op (observable return value)
 - [Phase 04-screen-time-engine]: shouldApplyShields seam: elapsedSeconds injected as param for deterministic test control; 30s guard window for iOS 26.2 premature-event suppression
 - [Phase 04-screen-time-engine]: ScreenTimeEngine added as explicit package dependency to DAM extension target in pbxproj
+- [Phase 04-screen-time-engine]: Reused MockCleanupHandler from AuthorizationManagerTests (same test module) in UATStubs — redeclaration is a Swift compile error
+- [Phase 04-screen-time-engine]: 04-VERIFICATION.md separates simulator constraints from requirement failures — deferred real-device coverage is documented, not a FAIL
 
 ### Research Flags (active risks)
 
@@ -80,6 +82,6 @@ None — all pre-Phase-3 blockers resolved as of 2026-03-04.
 
 ## Session Continuity
 
-Last session: 2026-03-06T12:30:10.255Z
-Stopped at: Completed 04-03-PLAN.md
+Last session: 2026-03-06T12:47:06.510Z
+Stopped at: Completed 04-04-PLAN.md
 Resume file: None
