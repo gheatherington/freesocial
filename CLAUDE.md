@@ -89,6 +89,11 @@ Git repo is live at `github.com/gheatherington/freesocial`.
 - Never hardcode `group.com.freesocial.app` in Swift; always use `AppGroup.suiteName`.
 - PRs should include: requirement IDs impacted, verification evidence, screenshots for UI changes.
 
+**After every phase execution:** commit any remaining untracked planning artifacts (PLAN files, RESEARCH.md, PHASE-VERIFICATION.md, updated CLAUDE.md/AGENTS.md), then push to GitHub:
+```bash
+git push origin main
+```
+
 ## iOS 26 SDK Compatibility Notes
 
 The skeleton was written targeting iOS 16.0 but the available simulator runtime is iOS 26.2. Several fixes were required:
