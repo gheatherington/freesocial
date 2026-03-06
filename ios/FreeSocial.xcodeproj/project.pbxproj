@@ -18,6 +18,7 @@
 		A102000100000001 /* DeviceActivityMonitorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102000200000001 /* DeviceActivityMonitorExtension.swift */; };
 		A102000100000010 /* PolicyStore in Frameworks (DAM) */ = {isa = PBXBuildFile; productRef = A102000500000001 /* PolicyStore */; };
 		A102000100000011 /* ConsentManager in Frameworks (DAM) */ = {isa = PBXBuildFile; productRef = A102000500000002 /* ConsentManager */; };
+		A102000100000012 /* ScreenTimeEngine in Frameworks (DAM) */ = {isa = PBXBuildFile; productRef = A102000500000003 /* ScreenTimeEngine (DAM) */; };
 		A102000100000020 /* DeviceActivityMonitor.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A102000200000005 /* DeviceActivityMonitor.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		/* ShieldConfiguration extension */
 		A103000100000001 /* ShieldConfigurationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A103000200000001 /* ShieldConfigurationExtension.swift */; };
@@ -33,7 +34,9 @@
 		A102000100000002 /* DeviceActivityMonitorExtension+Testing.swift in Sources (DAM) */ = {isa = PBXBuildFile; fileRef = A102000200000004 /* DeviceActivityMonitorExtension+Testing.swift */; };
 		A110000100000010 /* ConsentManager in Frameworks (FreeSocialTests) */ = {isa = PBXBuildFile; productRef = A110000500000001 /* ConsentManager */; };
 		A110000100000004 /* ShieldManagerTokenAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A110000200000004 /* ShieldManagerTokenAPITests.swift */; };
+		A110000100000005 /* DeviceActivityThresholdGuardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A110000200000006 /* DeviceActivityThresholdGuardTests.swift */; };
 		A110000100000011 /* ScreenTimeEngine in Frameworks (FreeSocialTests) */ = {isa = PBXBuildFile; productRef = A110000500000002 /* ScreenTimeEngine (FreeSocialTests) */; };
+		A110000100000012 /* PolicyStore in Frameworks (FreeSocialTests) */ = {isa = PBXBuildFile; productRef = A110000500000003 /* PolicyStore (FreeSocialTests) */; };
 		/* FreeSocialUITests UITest target */
 		A111000100000001 /* FreeSocialUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A111000200000001 /* FreeSocialUITests.swift */; };
 		A111000100000010 /* FreeSocial.app in Frameworks (UITests) */ = {isa = PBXBuildFile; fileRef = A101000200000005 /* FreeSocial.app */; };
@@ -119,6 +122,7 @@
 		A110000200000001 /* AppReviewPreflightTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReviewPreflightTests.swift; sourceTree = "<group>"; };
 		A110000200000002 /* DeviceActivityMonitorConsentGateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceActivityMonitorConsentGateTests.swift; sourceTree = "<group>"; };
 		A110000200000004 /* ShieldManagerTokenAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldManagerTokenAPITests.swift; sourceTree = "<group>"; };
+		A110000200000006 /* DeviceActivityThresholdGuardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceActivityThresholdGuardTests.swift; sourceTree = "<group>"; };
 		A110000200000005 /* FreeSocialTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FreeSocialTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		/* FreeSocialUITests UITest target */
 		A111000200000001 /* FreeSocialUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeSocialUITests.swift; sourceTree = "<group>"; };
@@ -143,6 +147,7 @@
 			files = (
 				A102000100000010 /* PolicyStore in Frameworks (DAM) */,
 				A102000100000011 /* ConsentManager in Frameworks (DAM) */,
+				A102000100000012 /* ScreenTimeEngine in Frameworks (DAM) */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +172,7 @@
 			files = (
 				A110000100000010 /* ConsentManager in Frameworks (FreeSocialTests) */,
 				A110000100000011 /* ScreenTimeEngine in Frameworks (FreeSocialTests) */,
+				A110000100000012 /* PolicyStore in Frameworks (FreeSocialTests) */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +264,7 @@
 				A110000200000001 /* AppReviewPreflightTests.swift */,
 				A110000200000002 /* DeviceActivityMonitorConsentGateTests.swift */,
 				A110000200000004 /* ShieldManagerTokenAPITests.swift */,
+				A110000200000006 /* DeviceActivityThresholdGuardTests.swift */,
 			);
 			path = FreeSocialTests;
 			sourceTree = "<group>";
@@ -343,6 +350,7 @@
 			packageProductDependencies = (
 				A102000500000001 /* PolicyStore */,
 				A102000500000002 /* ConsentManager */,
+				A102000500000003 /* ScreenTimeEngine (DAM) */,
 			);
 			productName = DeviceActivityMonitor;
 			productReference = A102000200000005 /* DeviceActivityMonitor.appex */;
@@ -401,6 +409,7 @@
 			packageProductDependencies = (
 				A110000500000001 /* ConsentManager */,
 				A110000500000002 /* ScreenTimeEngine (FreeSocialTests) */,
+				A110000500000003 /* PolicyStore (FreeSocialTests) */,
 			);
 			productName = FreeSocialTests;
 			productReference = A110000200000005 /* FreeSocialTests.xctest */;
@@ -540,6 +549,7 @@
 				A110000100000002 /* DeviceActivityMonitorConsentGateTests.swift in Sources */,
 				A110000100000003 /* DeviceActivityMonitorExtension+Testing.swift in Sources (FreeSocialTests) */,
 				A110000100000004 /* ShieldManagerTokenAPITests.swift in Sources */,
+				A110000100000005 /* DeviceActivityThresholdGuardTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1085,6 +1095,11 @@
 			package = A101000800000004 /* XCLocalSwiftPackageReference "Packages/ConsentManager" */;
 			productName = ConsentManager;
 		};
+		A102000500000003 /* ScreenTimeEngine (DAM) */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A101000800000002 /* XCLocalSwiftPackageReference "Packages/ScreenTimeEngine" */;
+			productName = ScreenTimeEngine;
+		};
 		A104000500000001 /* PolicyStore (SA) */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A101000800000003 /* XCLocalSwiftPackageReference "Packages/PolicyStore" */;
@@ -1099,6 +1114,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A101000800000002 /* XCLocalSwiftPackageReference "Packages/ScreenTimeEngine" */;
 			productName = ScreenTimeEngine;
+		};
+		A110000500000003 /* PolicyStore (FreeSocialTests) */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A101000800000003 /* XCLocalSwiftPackageReference "Packages/PolicyStore" */;
+			productName = PolicyStore;
 		};
 /* End XCSwiftPackageProductDependency section */
 
